@@ -5,8 +5,9 @@ char codedToChar(std::bitset<8> binary)
 	binary = decode(binary);					   // decode the the number
 	return static_cast<char>(binaryToInt(binary)); // parse it from binary to int, and from int to char
 }
-std::bitset<8> decode(std::bitset<8> binary)	   // to decode our bit we need to decrease it's value by 1 (binary)
+std::bitset<8> decode(std::bitset<8> binary)	   // to decode our bit we need to movr it one bit to the right then decrease it's value by 1 (binary)
 {
+	binary >>= 1;								   // shift our function one bit to the right
 	for (int i = 0; i < 8; i++)					   //we need to move over all the bits, and we know our number is 8 bit long 
 	{
 		int check{ binary.test(i) };			   // we need to check, if the bit is equal to 1 we decrease it to 0 and finish our function call
