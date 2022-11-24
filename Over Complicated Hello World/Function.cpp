@@ -1,8 +1,15 @@
-#include "function.h" // contains forward declarations, is needed because functions call one another
-
+#include "function.h"   // contains forward declarations, is needed because the functions call one another
+bool password()			// if password is right set master to true
+{
+	std::string input{};
+	std::cout << "Enter family name (Capital first letter of course): ";
+	std::cin >> input;
+	return (input == "Benichou");
+}
 char codedToChar(std::bitset<8> binary)
 {
-	binary = decode(binary);					   // decode the the number
+	static bool s_codeKey{ password()};			   // will only initialize once and won't delete when going out of scope because of static
+	if (s_codeKey) { binary = decode(binary); }	   // decode the the number if you entered the right password
 	return static_cast<char>(binaryToInt(binary)); // parse it from binary to int, and from int to char
 }
 std::bitset<8> decode(std::bitset<8> binary)	   // to decode our bit we need to movr it one bit to the right then decrease it's value by 1 (binary)
